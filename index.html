@@ -93,35 +93,43 @@
 
         return (
           <div class="container">
+            
             <div class="main-display">
-              <div>
-                <label htmlFor="kilos">Kilos</label>
+              <div class="main1">
+                <div class="main-title">
+                  <label htmlFor="kilos">Kilos</label>
+                </div>
                 <input 
                   value={inverted ? amount * 1.609 : amount }
-                  id="kilos"
+                  id="input1"
                   placeholder="Kilos"
                   type="number"
                   onChange={onChange}
                   disabled={inverted}
                 />
               </div>
-              <div>
-                <label htmlFor="miles">Miles</label>
+
+              <div class="main2">
+                <div class="main-title">
+                  <label htmlFor="miles">Miles</label>
+                </div>
                 <input 
                   value={inverted ? amount : amount * 0.609 }
-                  id="miles"
+                  id="input2"
                   placeholder="Miles"
                   disabled={!inverted}
                   type="number"
                   onChange={onChange}
                 />
+                </div>
               </div>
-              </div>
-              <div class="main-btns">
-                <button class="reset" onClick={reset} />
-                <button class="flip" onClick={onInvert}>Flip</button>
-              </div>
-          </div>
+
+                <div class="main-btns">
+                  <button class="reset" onClick={reset} />
+                  <button class="flip" onClick={onInvert}>Flip</button>
+                </div>
+
+            </div>
         )
       }
 
@@ -145,23 +153,29 @@
 
         return (
           <div class="container">
+
             <div class="main-display">
-                <div>
+              <div class="main1">
+                <div class="main-title">
                   <label htmlFor="inches">Inches</label>
-                  <input 
-                    value={inverted ? amount/ 2.54 : amount}
-                    id="inches"
-                    placeholder="Inches"
-                    type="number"
-                    onChange={onChange}
-                    disabled={inverted}
-                  />
                 </div>
-                <div>
-                  <label htmlFor="cms">Centimeter</label>
+                <input 
+                  value={inverted ? amount/ 2.54 : amount}
+                  id="input1"
+                  placeholder="Inches"
+                  type="number"
+                  onChange={onChange}
+                  disabled={inverted}
+                />
+              </div>
+
+              <div class="main2">
+                  <div class="main-title">
+                    <label htmlFor="cms">Centimeter</label>
+                  </div>
                   <input 
                     value={inverted ? amount: amount * 2.54}
-                    id="cms"
+                    id="input2"
                     placeholder="Cms"
                     disabled={!inverted}
                     type="number"
@@ -169,11 +183,14 @@
                   />
                 </div>
               </div>
+
               <div class="main-btns">
                 <button class="reset" onClick={reset} />
                 <button class="flip" onClick={onInvert}>Flip</button>
+              </div>
+
             </div>
-          </div>
+
         )
       }
       function App() {
