@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Super Converter</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="https://unpkg.com/react@17.0.2/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+
+      //Minutes To Hours
+      function MinutesToHours() {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+        
+        const onChange = (event) => {
+          setAmount(event.target.value);
+        }
+        
+        const reset = () => {
+          setAmount(0);
+        }
+        
+        const onInvert = () => {
+          reset();
+          setInverted((current) => !current);
+        }
+        
+        
+        return (
+          <div class="container">
+
+            <div class="main-display">
+              <div class="main1">
+                <div class="main-title">
+                  <label htmlFor="minutes">Minutes</label>
+                </div>
+                <input 
+                    value={inverted ? amount * 60 : amount}
+                    id="input1"
+                    placeholder="Minutes"
+                    type="number"
+                    onChange={onChange}
+                    disabled={inverted}
+                  />
+              </div>
+
+                <div class="main2">
+                  <div class="main-title">
+                    <label htmlFor="hours">Hours</label>
+                  </div>
+                  <input 
+                    value={inverted ? amount : Math.round(amount / 60)}
+                    id="input2"
+                    placeholder="Hours"
+                    type="number"
+                    disabled={!inverted}
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+
+              <div class="main-btns">
+                <button onClick={reset}>Reset</button>
+                <button onClick={onInvert}>Flip</button>
+              </div>
+
+          </div>
+        );
+      }
+
+      // Kms To Miles
+      function KmToMiles() {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+        
+        const onChange = (event) => {
+          setAmount(event.target.value);
+        }
+        
+        const reset = () => {
+          setAmount(0);
+        }
+        
+        const onInvert = () => {
+          reset();
+          setInverted((current) => !current);
+        }
+
+        return (
+          <div class="container">
+            <div class="main-display">
+              <div>
+                <label htmlFor="kilos">Kilos</label>
+                <input 
+                  value={inverted ? amount * 1.609 : amount }
+                  id="kilos"
+                  placeholder="Kilos"
+                  type="number"
+                  onChange={onChange}
+                  disabled={inverted}
+                />
+              </div>
+              <div>
+                <label htmlFor="miles">Miles</label>
+                <input 
+                  value={inverted ? amount : amount * 0.609 }
+                  id="miles"
+                  placeholder="Miles"
+                  disabled={!inverted}
+                  type="number"
+                  onChange={onChange}
+                />
+              </div>
+              </div>
+              <div class="main-btns">
+                <button onClick={reset}>Reset</button>
+                <button onClick={onInvert}>Flip</button>
+              </div>
+          </div>
+        )
+      }
+
+      //Inch To Cm
+      function InchToCm() {
+        const [amount, setAmount] = React.useState(0);
+        const [inverted, setInverted] = React.useState(false);
+        
+        const onChange = (event) => {
+          setAmount(event.target.value);
+        }
+        
+        const reset = () => {
+          setAmount(0);
+        }
+        
+        const onInvert = () => {
+          reset();
+          setInverted((current) => !current);
+        }
+
+        return (
+          <div class="container">
+            <div class="main-display">
+                <div>
+                  <label htmlFor="inches">Inches</label>
+                  <input 
+                    value={inverted ? amount/ 2.54 : amount}
+                    id="inches"
+                    placeholder="Inches"
+                    type="number"
+                    onChange={onChange}
+                    disabled={inverted}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="cms">Centimeter</label>
+                  <input 
+                    value={inverted ? amount: amount * 2.54}
+                    id="cms"
+                    placeholder="Cms"
+                    disabled={!inverted}
+                    type="number"
+                    onChange={onChange}
+                  />
+                </div>
+              </div>
+              <div class="main-btns">
+                <button onClick={reset}>Reset</button>
+                <button onClick={onInvert}>Flip</button>
+            </div>
+          </div>
+        )
+      }
+      function App() {
+        const [index, setIndex] = React.useState("0")
+        const [isDropdownOpen, setIsDropdownOpen] = React.useState(false);
+
+        const options = [
+          { value: "0", label: "Select Your Units" },
+          { value: "1", label: "Minutes to Hours" },
+          { value: "2", label: "Kilos to Miles" },
+          { value: "3", label: "Inch to Centimeter" },
+        ];
+
+        const onSelect = (value) => {
+          setIndex(value);
+          setIsDropdownOpen(false);
+        };
+
+        const toggleDropdown = () => {
+          setIsDropdownOpen(!isDropdownOpen);
+        };
+
+        return ( 
+          <div>
+            <div class="wrap">
+              <div class="top">
+                <div class="bigTitle">
+                  <div class="wrap">
+                    <h1>Super Converter</h1>
+                    <button>Reset</button>
+                  </div>
+                </div>
+              </div>
+                <div class="container">
+                  <article class="select">
+                    <div className="dropdown">
+                    <div 
+                      onClick={toggleDropdown}
+                    >
+                      {options.find((option) => option.value === index).label}
+                      <i className={`arrow ${isDropdownOpen ? "open" : ""}`}></i>
+                    </div>
+                    <ul className={`options ${isDropdownOpen ? "open" : ""}`}>
+                      {options.map((option) => (
+                        <li
+                          key={option.value}
+                          onClick={() => onSelect(option.value)}
+                        >
+                          {option.label}
+                        </li>
+                      ))}
+                    </ul>
+                    </div>
+                  </article>
+                <div class="main">
+                  {index === "0" ? "Select Your Units!" : null}
+                  {index === "1" ? <MinutesToHours /> : null}
+                  {index === "2" ? <KmToMiles /> : null}
+                  {index === "3" ? <InchToCm /> : null}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+      const root = document.getElementById("root");
+      ReactDOM.render(<App />, root);
+    </script>
+  </body>
+</html>
